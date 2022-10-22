@@ -10,15 +10,11 @@ A new Flutter project named Movie in it , i'm fetch some data from api Like movi
 
 - dio
 
-# State Management
-
-- flutter_bloc
+ State Management:-  flutter_bloc
 
 - equatable
 
-# Service Locator
-
-- get_it: ^7.2.0
+ Service Locator:-  get_it: ^7.2.0
 
 - animate_do
 
