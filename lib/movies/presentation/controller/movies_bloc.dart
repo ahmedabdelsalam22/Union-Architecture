@@ -29,7 +29,6 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     // get top rated data
 
     on<GetTopRatedMoviesEvent>(_getTopRatedMovies);
-
   }
 
   FutureOr<void> _getNowPlayingMovies(

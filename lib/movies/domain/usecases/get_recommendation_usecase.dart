@@ -5,29 +5,24 @@ import 'package:movies_app/core/useCase/base_use_case.dart';
 import 'package:movies_app/movies/domain/entities/recommendation.dart';
 import 'package:movies_app/movies/domain/repository/base_movies_repository.dart';
 
-class GetRecommendationUseCase extends BaseUseCase<List<Recommendation>,RecommendationParameters>{
+class GetRecommendationUseCase
+    extends BaseUseCase<List<Recommendation>, RecommendationParameters> {
+  BaseMoviesRepository baseMoviesRepository;
 
-BaseMoviesRepository baseMoviesRepository;
-GetRecommendationUseCase(this.baseMoviesRepository);
+  GetRecommendationUseCase(this.baseMoviesRepository);
 
   @override
-  Future<Either<Failure, List<Recommendation>>> call(RecommendationParameters parameters)async {
-  return await baseMoviesRepository.getRecommendation(parameters);
+  Future<Either<Failure, List<Recommendation>>> call(
+      RecommendationParameters parameters) async {
+    return await baseMoviesRepository.getRecommendation(parameters);
   }
-
-
-
-
 }
 
-
 class RecommendationParameters extends Equatable {
-
   final int id;
 
   const RecommendationParameters({required this.id});
 
   @override
   List<Object> get props => [id];
-
 }

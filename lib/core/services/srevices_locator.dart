@@ -13,16 +13,12 @@ import '../../movies/domain/usecases/get_recommendation_usecase.dart';
 
 final sl = GetIt.instance;
 
-class ServicesLocator{
-
-  void init(){
-
+class ServicesLocator {
+  void init() {
     ///bloc
 
-    sl.registerFactory(() => MoviesBloc(sl(),sl(),sl()));
+    sl.registerFactory(() => MoviesBloc(sl(), sl(), sl()));
     sl.registerFactory(() => MovieDetailsBloc(sl(), sl()));
-
-
 
     ///1-Use Cases
 
@@ -32,14 +28,13 @@ class ServicesLocator{
     sl.registerLazySingleton(() => GetMovieDetailsUseCase(sl()));
     sl.registerLazySingleton(() => GetRecommendationUseCase(sl()));
 
-
     ///2-Repository
 
-    sl.registerLazySingleton<BaseMoviesRepository>(() => MoviesRepository(sl()));
+    sl.registerLazySingleton<BaseMoviesRepository>(
+        () => MoviesRepository(sl()));
 
     ///3-DATA SOURCE
-    sl.registerLazySingleton<BaseMovieRemoteDataSource>(() => MovieRemoteDataSource());
-
+    sl.registerLazySingleton<BaseMovieRemoteDataSource>(
+        () => MovieRemoteDataSource());
   }
-
 }

@@ -10,105 +10,85 @@ import 'package:movies_app/movies/domain/usecases/get_recommendation_usecase.dar
 
 import '../../../core/network/api_constance.dart';
 
-
-abstract class BaseMovieRemoteDataSource{
-
+abstract class BaseMovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();
-  Future<List<MovieModel>> getPopularMovies();
-  Future<List<MovieModel>> getTopRatedMovies();
-  Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameters);
-  Future<List<Recommendation>> getRecommendation(RecommendationParameters parameters);
 
+  Future<List<MovieModel>> getPopularMovies();
+
+  Future<List<MovieModel>> getTopRatedMovies();
+
+  Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameters);
+
+  Future<List<Recommendation>> getRecommendation(
+      RecommendationParameters parameters);
 }
 
-
-class MovieRemoteDataSource extends BaseMovieRemoteDataSource{
-
-
+class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   @override
-  Future<List<MovieModel>> getNowPlayingMovies()async{
-   final response = await Dio().get(ApiConstance.nowPlayingMoviePath);
+  Future<List<MovieModel>> getNowPlayingMovies() async {
+    final response = await Dio().get(ApiConstance.nowPlayingMoviePath);
 
-   if(response.statusCode == 200){
-     return List<MovieModel>.from((response.data["results"] as List)
-         .map((e) =>MovieModel.fromJson(e) ));
-   }else{
-     throw ServerException(
-         errorMessageModel: ErrorMessageModel.fromJson(response.data)
-     );
-   }
-
+    if (response.statusCode == 200) {
+      return List<MovieModel>.from((response.data["results"] as List)
+          .map((e) => MovieModel.fromJson(e)));
+    } else {
+      throw ServerException(
+          errorMessageModel: ErrorMessageModel.fromJson(response.data));
+    }
   }
 
-
-
   @override
-  Future<List<MovieModel>> getPopularMovies() async{
+  Future<List<MovieModel>> getPopularMovies() async {
     final response = await Dio().get(ApiConstance.popularMoviePath);
 
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       return List<MovieModel>.from((response.data["results"] as List)
-          .map((e) =>MovieModel.fromJson(e) ));
-    }else{
+          .map((e) => MovieModel.fromJson(e)));
+    } else {
       throw ServerException(
-          errorMessageModel: ErrorMessageModel.fromJson(response.data)
-      );
+          errorMessageModel: ErrorMessageModel.fromJson(response.data));
     }
-
   }
 
-
-
-
   @override
-  Future<List<MovieModel>> getTopRatedMovies() async{
+  Future<List<MovieModel>> getTopRatedMovies() async {
     final response = await Dio().get(ApiConstance.topRatedMoviePath);
 
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       return List<MovieModel>.from((response.data["results"] as List)
-          .map((e) =>MovieModel.fromJson(e) ));
-    }else{
+          .map((e) => MovieModel.fromJson(e)));
+    } else {
       throw ServerException(
-          errorMessageModel: ErrorMessageModel.fromJson(response.data)
-      );
+          errorMessageModel: ErrorMessageModel.fromJson(response.data));
     }
-
   }
 
-
   @override
-  Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameters)async {
+  Future<MovieDetailsModel> getMovieDetails(
+      MovieDetailsParameters parameters) async {
+    final response =
+        await Dio().get(ApiConstance.movieDetailsPath(parameters.movieId));
 
-    final response = await Dio().get(ApiConstance.movieDetailsPath(parameters.movieId));
-
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       return MovieDetailsModel.fromJson(response.data);
-    }else{
+    } else {
       throw ServerException(
-          errorMessageModel: ErrorMessageModel.fromJson(response.data)
-      );
+          errorMessageModel: ErrorMessageModel.fromJson(response.data));
     }
-
   }
 
   @override
-  Future<List<Recommendation>> getRecommendation(RecommendationParameters parameters)async {
+  Future<List<Recommendation>> getRecommendation(
+      RecommendationParameters parameters) async {
+    final response =
+        await Dio().get(ApiConstance.recommendationsPath(parameters.id));
 
-    final response = await Dio().get(ApiConstance.recommendationsPath(parameters.id));
-
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       return List<RecommendationModel>.from((response.data["results"] as List)
-          .map((e) =>RecommendationModel.fromJson(e) ));
-    }else{
+          .map((e) => RecommendationModel.fromJson(e)));
+    } else {
       throw ServerException(
-          errorMessageModel: ErrorMessageModel.fromJson(response.data)
-      );
+          errorMessageModel: ErrorMessageModel.fromJson(response.data));
     }
-
   }
-
-
-
-
 }
-

@@ -7,17 +7,16 @@ import 'package:movies_app/movies/domain/usecases/get_recommendation_usecase.dar
 
 import '../entities/recommendation.dart';
 
-abstract class BaseMoviesRepository{
+abstract class BaseMoviesRepository {
+  Future<Either<Failure, List<Movie>>> getNowPlayingMovies();
 
-  Future<Either<Failure,List<Movie>>> getNowPlayingMovies();
+  Future<Either<Failure, List<Movie>>> getPopularMovies();
 
-  Future<Either<Failure,List<Movie>>> getPopularMovies();
+  Future<Either<Failure, List<Movie>>> getTopRatedMovies();
 
-  Future<Either<Failure,List<Movie>>> getTopRatedMovies();
+  Future<Either<Failure, MovieDetail>> getMovieDetails(
+      MovieDetailsParameters parameters);
 
-  Future<Either<Failure,MovieDetail>> getMovieDetails(MovieDetailsParameters parameters);
-
-  Future<Either<Failure,List<Recommendation>>> getRecommendation(RecommendationParameters parameters);
-
-
+  Future<Either<Failure, List<Recommendation>>> getRecommendation(
+      RecommendationParameters parameters);
 }

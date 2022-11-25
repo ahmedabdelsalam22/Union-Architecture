@@ -9,70 +9,61 @@ import 'package:movies_app/movies/domain/repository/base_movies_repository.dart'
 import 'package:movies_app/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:movies_app/movies/domain/usecases/get_recommendation_usecase.dart';
 
-class MoviesRepository extends BaseMoviesRepository{
-
+class MoviesRepository extends BaseMoviesRepository {
   final BaseMovieRemoteDataSource baseMovieRemoteDataSource;
 
   MoviesRepository(this.baseMovieRemoteDataSource);
 
-
   @override
-  Future<Either<Failure,List<Movie>>> getNowPlayingMovies() async{
-
-   final result = await baseMovieRemoteDataSource.getNowPlayingMovies();
-  try{
-    return Right(result);
-  }on ServerException catch(failure){
-   return left(ServerFailure(failure.errorMessageModel.statusMessage));
-  }
-
-
+  Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
+    final result = await baseMovieRemoteDataSource.getNowPlayingMovies();
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
   }
 
   @override
-  Future<Either<Failure,List<Movie>>> getPopularMovies() async{
+  Future<Either<Failure, List<Movie>>> getPopularMovies() async {
     final result = await baseMovieRemoteDataSource.getPopularMovies();
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
-
   }
 
-
   @override
-  Future<Either<Failure,List<Movie>>> getTopRatedMovies() async{
+  Future<Either<Failure, List<Movie>>> getTopRatedMovies() async {
     final result = await baseMovieRemoteDataSource.getTopRatedMovies();
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
-
   }
 
-
   @override
-  Future<Either<Failure, MovieDetail>> getMovieDetails(MovieDetailsParameters parameters) async{
+  Future<Either<Failure, MovieDetail>> getMovieDetails(
+      MovieDetailsParameters parameters) async {
     final result = await baseMovieRemoteDataSource.getMovieDetails(parameters);
-    try{
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
 
   @override
-  Future<Either<Failure, List<Recommendation>>> getRecommendation(RecommendationParameters parameters) async{
-    final result = await baseMovieRemoteDataSource.getRecommendation(parameters);
-    try{
+  Future<Either<Failure, List<Recommendation>>> getRecommendation(
+      RecommendationParameters parameters) async {
+    final result =
+        await baseMovieRemoteDataSource.getRecommendation(parameters);
+    try {
       return Right(result);
-    }on ServerException catch(failure){
+    } on ServerException catch (failure) {
       return left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
-
-
-
 }

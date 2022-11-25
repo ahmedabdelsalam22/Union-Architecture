@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/utils/enums.dart';
 import 'package:movies_app/movies/presentation/controller/movies_bloc.dart';
@@ -8,7 +8,6 @@ import 'package:movies_app/movies/presentation/controller/movies_state.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/network/api_constance.dart';
-import '../../../core/utils/dummy.dart';
 
 class TopRatedComponent extends StatelessWidget {
   const TopRatedComponent({Key? key}) : super(key: key);
@@ -16,13 +15,10 @@ class TopRatedComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
-
-      buildWhen: (previous, current)=>previous.topRatedState != current.topRatedState,
-
-      builder: (context,state){
-
-        switch(state.topRatedState){
-
+      buildWhen: (previous, current) =>
+          previous.topRatedState != current.topRatedState,
+      builder: (context, state) {
+        switch (state.topRatedState) {
           case RequestState.loading:
             return const SizedBox(
               height: 170,
@@ -50,7 +46,7 @@ class TopRatedComponent extends StatelessWidget {
                         },
                         child: ClipRRect(
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0)),
+                              const BorderRadius.all(Radius.circular(8.0)),
                           child: CachedNetworkImage(
                             width: 120.0,
                             fit: BoxFit.cover,
@@ -68,7 +64,7 @@ class TopRatedComponent extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),

@@ -17,11 +17,10 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   GetMovieDetailsUseCase getMovieDetailsUseCase;
   GetRecommendationUseCase getRecommendationUseCase;
 
-  MovieDetailsBloc(this.getMovieDetailsUseCase,this.getRecommendationUseCase)
+  MovieDetailsBloc(this.getMovieDetailsUseCase, this.getRecommendationUseCase)
       : super(const MovieDetailsState()) {
     on<GetMovieDetailsEvent>(_getMovieDetails);
     on<GetMovieRecommendation>(_getMovieRecommendation);
-
   }
 
   FutureOr<void> _getMovieDetails(
@@ -38,18 +37,15 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   }
 
   FutureOr<void> _getMovieRecommendation(
-      GetMovieRecommendation event, Emitter<MovieDetailsState> emit)async {
-
+      GetMovieRecommendation event, Emitter<MovieDetailsState> emit) async {
     final result =
-    await getRecommendationUseCase(RecommendationParameters(id: event.id));
+        await getRecommendationUseCase(RecommendationParameters(id: event.id));
 
     result.fold(
-            (l) => emit(state.copyWith(
+        (l) => emit(state.copyWith(
             recommendationState: RequestState.error,
             recommendationMessage: l.message)),
-            (r) => emit(state.copyWith(
-                recommendationState: RequestState.loaded,
-                recommendation: r)));
+        (r) => emit(state.copyWith(
+            recommendationState: RequestState.loaded, recommendation: r)));
   }
-
 }

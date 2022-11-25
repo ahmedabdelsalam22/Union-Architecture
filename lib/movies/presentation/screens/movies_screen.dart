@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_app/movies/presentation/controller/movies_bloc.dart';
 import 'package:movies_app/movies/presentation/controller/movies_events.dart';
-
 
 import '../../../core/services/srevices_locator.dart';
 import '../../../core/utils/app_string.dart';
@@ -18,8 +18,10 @@ class MoviesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-       return sl<MoviesBloc>()..add(GetNowPlayingMoviesEvent())
-         ..add(GetPopularMoviesEvent())..add(GetTopRatedMoviesEvent());
+        return sl<MoviesBloc>()
+          ..add(GetNowPlayingMoviesEvent())
+          ..add(GetPopularMoviesEvent())
+          ..add(GetTopRatedMoviesEvent());
       },
       child: Scaffold(
         body: SingleChildScrollView(
@@ -29,17 +31,22 @@ class MoviesScreen extends StatelessWidget {
             children: [
               const NowPlayingComponent(),
               Container(
-                margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
+                margin: EdgeInsets.fromLTRB(
+                  16.0.sp,
+                  24.0.sp,
+                  16.0.sp,
+                  8.0.sp,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       AppString.popular,
                       style: GoogleFonts.poppins(
-                        fontSize: 19,
+                        fontSize: 19.sp,
                         fontWeight: FontWeight.w500,
                         color: Colors.white,
-                        letterSpacing: 0.15,
+                        letterSpacing: 0.15.sp,
                       ),
                     ),
                     InkWell(
@@ -47,17 +54,16 @@ class MoviesScreen extends StatelessWidget {
                         /// TODO : NAVIGATION TO POPULAR SCREEN
                       },
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0.sp),
                         child: Row(
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               AppString.seeMore,
-                            style: TextStyle(
-                                color: Colors.white
-                            ),),
+                              style: TextStyle(color: Colors.white),
+                            ),
                             Icon(
                               Icons.arrow_forward_ios,
-                              size: 16.0,
+                              size: 16.0.sp,
                             )
                           ],
                         ),
@@ -68,11 +74,11 @@ class MoviesScreen extends StatelessWidget {
               ),
               const PopularComponent(),
               Container(
-                margin: const EdgeInsets.fromLTRB(
-                  16.0,
-                  24.0,
-                  16.0,
-                  8.0,
+                margin: EdgeInsets.fromLTRB(
+                  16.0.sp,
+                  24.0.sp,
+                  16.0.sp,
+                  8.0.sp,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,26 +86,26 @@ class MoviesScreen extends StatelessWidget {
                     Text(
                       AppString.topRated,
                       style: GoogleFonts.poppins(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.15,
-                          color: Colors.white
-                      ),
+                          fontSize: 19.sp,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 0.15,
+                          color: Colors.white),
                     ),
                     InkWell(
                       onTap: () {
                         /// TODO : NAVIGATION TO Top Rated Movies Screen
                       },
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0.sp),
                         child: Row(
-                          children: const [
-                            Text(AppString.seeMore,style: TextStyle(
-                                color: Colors.white
-                            ),),
+                          children: [
+                            const Text(
+                              AppString.seeMore,
+                              style: TextStyle(color: Colors.white),
+                            ),
                             Icon(
                               Icons.arrow_forward_ios,
-                              size: 16.0,
+                              size: 16.0.sp,
                             )
                           ],
                         ),
@@ -109,7 +115,7 @@ class MoviesScreen extends StatelessWidget {
                 ),
               ),
               const TopRatedComponent(),
-              const SizedBox(height: 50.0),
+              SizedBox(height: 50.0.h),
             ],
           ),
         ),

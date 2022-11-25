@@ -8,28 +8,24 @@ import 'package:movies_app/movies/presentation/controller/movies_state.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/network/api_constance.dart';
-import '../../../core/utils/dummy.dart';
 
 class PopularComponent extends StatelessWidget {
   const PopularComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MoviesBloc,MoviesState>(
-
-      buildWhen: (previous, current)=>previous.popularState != current.popularState,
-
-      builder: (context ,state){
-
-        switch(state.popularState){
-
+    return BlocBuilder<MoviesBloc, MoviesState>(
+      buildWhen: (previous, current) =>
+          previous.popularState != current.popularState,
+      builder: (context, state) {
+        switch (state.popularState) {
           case RequestState.loading:
-             return const SizedBox(
-               height: 170,
-               child: Center(
-                 child: CircularProgressIndicator(),
-               ),
-             );
+            return const SizedBox(
+              height: 170,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           case RequestState.loaded:
             return FadeIn(
               duration: const Duration(milliseconds: 500),
@@ -50,7 +46,7 @@ class PopularComponent extends StatelessWidget {
                         },
                         child: ClipRRect(
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0)),
+                              const BorderRadius.all(Radius.circular(8.0)),
                           child: CachedNetworkImage(
                             width: 120.0,
                             fit: BoxFit.cover,
@@ -68,7 +64,7 @@ class PopularComponent extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),
@@ -83,7 +79,6 @@ class PopularComponent extends StatelessWidget {
               child: Text(state.popularMessage),
             );
         }
-
       },
     );
   }

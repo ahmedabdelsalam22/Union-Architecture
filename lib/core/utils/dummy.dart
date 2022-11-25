@@ -1,4 +1,3 @@
-
 import '../../movies/domain/entities/movie.dart';
 
 List<Movie> moviesList = [
