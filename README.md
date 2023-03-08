@@ -1,3 +1,4 @@
+![clean2-768x491](https://user-images.githubusercontent.com/75587814/223740591-b045ad13-d83a-45cc-9ed4-fe04e58e2a59.png)
 # movies_app
 
 A new Flutter project named Movie in it , i'm fetch some data from api Like movies 
